@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 var indexRouter = require("./routes/index");
 var registerApi = require("./routes/registerApi");
+var loginApi = require("./routes/loginApi");
 
 var app = express();
 
@@ -18,5 +19,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/api/register", registerApi);
+app.use("/api/login", loginApi);
 
 module.exports = app;
