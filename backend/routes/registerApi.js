@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const registerSchema = require("../schemas/registerSchema");
 const validate = require("../middlewares/validate");
 
-router.post("/", validate(registerSchema), async function (req, res) {
+router.post("/", validate(registerSchema, "body"), async function (req, res) {
   const { username, password } = req.body;
   let hashedPassword;
   try {
