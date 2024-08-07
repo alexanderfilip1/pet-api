@@ -3,6 +3,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+
+const corsOptions = {
+  origin: "http://127.0.0.1:5173",
+  methods: ["GET", "POST"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 var indexRouter = require("./routes/index");
 var registerApi = require("./routes/registerApi");
