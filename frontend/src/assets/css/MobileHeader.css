@@ -1,0 +1,37 @@
+.mobileHeader {
+  display: none;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  background: #d8ab71;
+  right: 0;
+  opacity: 1;
+}
+
+@media only screen and (max-width: 768px) {
+  .mobileHeader {
+    display: block;
+  }
+}
+
+.mobileHeader__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.mobileHeader__list--item {
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem;
+}
+.mobileHeader__list--link {
+  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.mobileHeader__list--item:active {
+  background-color: #555555;
+}

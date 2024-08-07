@@ -1,5 +1,5 @@
 .header {
-  padding: 0.75rem;
+  /* padding: 0.75rem; */
   background-color: #212121;
 }
 
@@ -10,6 +10,9 @@
 
 .header__navbar {
   width: 100%;
+  align-items: center;
+  position: relative;
+  padding: 0.75rem;
 }
 
 .header__logo {
@@ -25,4 +28,25 @@
 
 .header__list {
   gap: 1rem;
+}
+
+.header__navbar--burgerMenu {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .header__navbar--burgerMenu {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header__list--link {
+    display: none;
+  }
+}
+
+.header__list--link:hover,
+.header__logo:hover {
+  text-shadow: 1px 1px 2px red;
 }
