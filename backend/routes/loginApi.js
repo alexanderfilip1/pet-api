@@ -6,7 +6,7 @@ const loginSchema = require("../schemas/registerSchema");
 const validate = require("../middlewares/validate");
 const jwt = require("jsonwebtoken");
 
-router.post("/", validate(loginSchema), async function (req, res) {
+router.post("/", validate(loginSchema, "body"), async function (req, res) {
   const { username, password } = req.body;
   try {
     const [data] = await db.query("SELECT * FROM users WHERE username = ?", [
@@ -16,6 +16,7 @@ router.post("/", validate(loginSchema), async function (req, res) {
     console.log(data[0]);
     const isValid = await bcrypt.compare(password, data[0].password);
     if (username === data[0].username && isValid) {
+      console.log(data[0].id);
       const token = jwt.sign(
         { id: data[0].id, username: username },
         process.env.JWT_SECRET,
