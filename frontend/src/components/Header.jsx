@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../assets/css/Header.css";
 import MobileHeader from "./MobileHeader";
 import "../Links";
@@ -19,7 +19,7 @@ export default function Header() {
     },
   ];
 
-  const [burgerMenu, setBurgetMenu] = useState(false);
+  const [burgerMenu, setBurgerMenu] = useState(false);
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function Header() {
           <div
             className="header__navbar--burgerMenu"
             onClick={() => {
-              setBurgetMenu(!burgerMenu);
+              setBurgerMenu(!burgerMenu);
             }}
           >
             <svg
