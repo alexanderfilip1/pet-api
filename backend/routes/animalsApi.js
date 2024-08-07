@@ -41,7 +41,7 @@ router.get("/", secure, async function (req, res) {
         res.send({ message: "Fish are not supported yet." });
         break;
       default:
-        res.status(400).send({ error: "No animal found" });
+        res.status(404).send({ error: "No animal found" });
         break;
     }
   } catch (err) {

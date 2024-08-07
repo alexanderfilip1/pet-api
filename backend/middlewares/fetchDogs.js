@@ -18,8 +18,6 @@ const fetchDogs = async (animal, random, breed, callback) => {
       url = `https://dog.ceo/api/breed/${breed}/images/random`;
       const req = await fetch(url);
       const body = await req.json();
-
-      console.log("Second function executed");
       callback(null, { body, url });
     } catch (err) {
       callback(err);
