@@ -31,7 +31,10 @@ export default function RegisterPage() {
           <form
             action=""
             className="main__register--form"
-            onSubmit={registerUser}
+            onSubmit={(e) => {
+              e.preventDefault();
+              registerUser();
+            }}
           >
             <label htmlFor="username">
               Username
