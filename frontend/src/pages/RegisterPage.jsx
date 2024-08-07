@@ -5,6 +5,8 @@ import "../assets/css/Register.css";
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [notification, setNotification] = useState("");
 
   const registerUser = async () => {
     try {
@@ -15,12 +17,18 @@ export default function RegisterPage() {
       const req = await fetch("http://127.0.0.1:3000/api/register", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: data,
+        body: JSON.stringify(data),
       });
       const body = await req.json();
+      if (body.status === "error") {
+        setError(body.message);
+      } else {
+        setNotification(body.message);
+      }
       console.log(body);
     } catch (err) {
       console.log(err);
+      setError("User register failed");
     }
   };
   return (
@@ -58,6 +66,8 @@ export default function RegisterPage() {
                 }}
               />
             </label>
+            <p className="error">{error}</p>
+            <p className="notification">{notification}</p>
             <button type="submit" className="registerBtn">
               Register
             </button>
