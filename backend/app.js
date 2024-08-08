@@ -11,14 +11,13 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
-
 var indexRouter = require("./routes/index");
 var registerApi = require("./routes/registerApi");
 var loginApi = require("./routes/loginApi");
 var animalsApi = require("./routes/animalsApi");
 
 var app = express();
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(logger("dev"));
