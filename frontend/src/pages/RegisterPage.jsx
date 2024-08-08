@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header";
 import "../assets/css/Register.css";
+import SubmitBtn from "../components/SubmitBtn";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -68,9 +69,7 @@ export default function RegisterPage() {
             </label>
             <p className="error">{error}</p>
             <p className="notification">{notification}</p>
-            <button type="submit" className="registerBtn">
-              Register
-            </button>
+            <SubmitBtn action={"Register"} />
           </form>
         </section>
       </main>
