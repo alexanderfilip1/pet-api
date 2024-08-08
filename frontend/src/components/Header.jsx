@@ -2,8 +2,10 @@ import { useState } from "react";
 import "../assets/css/Header.css";
 import MobileHeader from "./MobileHeader";
 import "../Links";
+import AuthToken from "../components/AuthToken";
 
 export default function Header() {
+  const { token, auth } = AuthToken();
   const links = [
     {
       path: "Documentation",
@@ -29,16 +31,31 @@ export default function Header() {
             AnimalsApi
           </a>
           <ul className="header__list">
-            {links.map((link, index) => {
-              const { path, url } = link;
-              return (
-                <li className="header__list--item" key={index}>
-                  <a href={url} className="header__list--link">
-                    {path}
-                  </a>
-                </li>
-              );
-            })}
+            {console.log("Auth: ", auth, "Token:", token)}
+            {auth ? (
+              <li className="header__list--item">
+                <a
+                  href="/"
+                  className="header__list--link"
+                  onClick={() => {
+                    localStorage.removeItem("authToken");
+                  }}
+                >
+                  Log Out
+                </a>
+              </li>
+            ) : (
+              links.map((link, index) => {
+                const { path, url } = link;
+                return (
+                  <li className="header__list--item" key={index}>
+                    <a href={url} className="header__list--link">
+                      {path}
+                    </a>
+                  </li>
+                );
+              })
+            )}
           </ul>
 
           <div
