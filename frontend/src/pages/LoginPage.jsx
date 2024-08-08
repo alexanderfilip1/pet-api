@@ -19,6 +19,9 @@ export default function LoginPage() {
       });
       const res = await req.json();
       console.log(res);
+      if (res.status === "success") {
+        localStorage.setItem("authToken", res.token);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -29,7 +32,8 @@ export default function LoginPage() {
       <main className="main">
         <section className="login__section">
           <form
-            onSubmit={() => {
+            onSubmit={(e) => {
+              e.preventDefault();
               sendData();
             }}
           >
@@ -51,7 +55,6 @@ export default function LoginPage() {
                 id="password"
                 className="inputField"
                 onChange={(e) => {
-                  e.preventDefault();
                   setPassword(e.target.value);
                 }}
               />
