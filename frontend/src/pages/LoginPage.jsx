@@ -5,6 +5,8 @@ import SubmitBtn from "../components/SubmitBtn";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [notification, setNotification] = useState("");
 
   const sendData = async () => {
     const data = {
@@ -21,9 +23,11 @@ export default function LoginPage() {
       console.log(res);
       if (res.status === "success") {
         localStorage.setItem("authToken", res.token);
+        setNotification("Signed In");
       }
     } catch (err) {
       console.log(err);
+      setError("Incorrect username or password");
     }
   };
   return (
@@ -59,6 +63,8 @@ export default function LoginPage() {
                 }}
               />
             </label>
+            <p className="error">{error}</p>
+            <p className="notification">{notification}</p>
             <SubmitBtn action={"Login"} />
           </form>
         </section>
