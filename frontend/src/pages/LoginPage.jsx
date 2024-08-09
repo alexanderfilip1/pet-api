@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import SubmitBtn from "../components/SubmitBtn";
+import "../assets/css/Login.css";
+import Loader from "../components/Loader";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [notification, setNotification] = useState("");
-
+  const [loader, setLoader] = useState(false);
+  const hideLoader = () => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  };
   const sendData = async () => {
+    setLoader(true);
     const data = {
       username: username,
       password: password,
@@ -23,19 +31,24 @@ export default function LoginPage() {
       console.log(res);
       if (res.status === "success") {
         localStorage.setItem("authToken", res.token);
+        hideLoader();
         setNotification("Signed In");
       }
     } catch (err) {
       console.log(err);
+      setNotification("");
+      hideLoader();
       setError("Incorrect username or password");
     }
   };
   return (
     <>
       <Header />
+      {loader && <Loader />}
       <main className="main">
-        <section className="login__section">
+        <section className="main__login">
           <form
+            className="main__login--form"
             onSubmit={(e) => {
               e.preventDefault();
               sendData();
