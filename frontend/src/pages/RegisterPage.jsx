@@ -10,7 +10,11 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [notification, setNotification] = useState("");
   const [loader, setLoader] = useState(false);
-
+  const hideLoader = () => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  };
   const registerUser = async () => {
     setLoader(true);
     try {
@@ -27,21 +31,16 @@ export default function RegisterPage() {
       if (body.status === "error") {
         setNotification("");
         setError(body.message);
-        setTimeout(() => {
-          setLoader(false);
-        }, 2000);
+        hideLoader();
       } else {
-        setTimeout(() => {
-          setLoader(false);
-        }, 2000);
+        setError("");
+        hideLoader();
         setNotification(body.message);
       }
       console.log(body);
     } catch (err) {
       console.log(err);
-      setTimeout(() => {
-        setLoader(false);
-      }, 2000);
+      hideLoader();
       setNotification("");
       setError("User register failed");
     }
