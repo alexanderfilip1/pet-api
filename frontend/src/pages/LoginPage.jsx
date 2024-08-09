@@ -44,6 +44,7 @@ export default function LoginPage() {
   return (
     <>
       <Header />
+      {loader && <Loader />}
       <main className="main">
         <section className="main__login">
           <form
