@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import "../assets/css/Register.css";
 import SubmitBtn from "../components/SubmitBtn";
 import Loader from "../components/Loader";
+import { Navigate } from "react-router-dom";
+import AuthToken from "../components/AuthToken";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -10,6 +12,9 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [notification, setNotification] = useState("");
   const [loader, setLoader] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const auth = AuthToken();
+
   const hideLoader = () => {
     setTimeout(() => {
       setLoader(false);
@@ -35,7 +40,10 @@ export default function RegisterPage() {
       } else {
         setError("");
         hideLoader();
-        setNotification(body.message);
+        setNotification(`${body.message}. Redirecting to login page.`);
+        setTimeout(() => {
+          setRedirect(true);
+        }, 4000);
       }
       console.log(body);
     } catch (err) {
@@ -45,47 +53,59 @@ export default function RegisterPage() {
       setError("User register failed");
     }
   };
+
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
   return (
     <>
       <Header />
       {loader && <Loader />}
       <main className="main">
         <section className="main__register">
-          <form
-            action=""
-            className="main__register--form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              registerUser();
-              setLoader(true);
-            }}
-          >
-            <label htmlFor="username">
-              Username
-              <input
-                type="text"
-                id="username"
-                className="inputField"
-                onChange={(e) => {
-                  setUsername(e.target.value);
+          {!auth ? (
+            <>
+              <form
+                action=""
+                className="main__register--form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  registerUser();
+                  setLoader(true);
                 }}
-              />
-            </label>
-            <label htmlFor="password">
-              Password
-              <input
-                type="password"
-                id="password"
-                className="inputField"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </label>
-            <p className="error">{error}</p>
-            <p className="notification">{notification}</p>
-            <SubmitBtn action={"Register"} />
-          </form>
+              >
+                <label htmlFor="username">
+                  Username
+                  <input
+                    type="text"
+                    id="username"
+                    className="inputField"
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
+                  />
+                </label>
+                <label htmlFor="password">
+                  Password
+                  <input
+                    type="password"
+                    id="password"
+                    className="inputField"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                </label>
+                <p className="error">{error}</p>
+                <p className="notification">{notification}</p>
+                <SubmitBtn action={"Register"} />
+              </form>
+            </>
+          ) : (
+            <h1 style={{ textAlign: "center" }}>
+              You&apos;re already registered
+            </h1>
+          )}
         </section>
       </main>
     </>
