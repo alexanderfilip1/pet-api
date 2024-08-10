@@ -4,6 +4,7 @@ import SubmitBtn from "../components/SubmitBtn";
 import "../assets/css/Login.css";
 import Loader from "../components/Loader";
 import AuthToken from "../components/AuthToken";
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [notification, setNotification] = useState("");
   const [loader, setLoader] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const auth = AuthToken();
 
   const hideLoader = () => {
@@ -36,7 +38,10 @@ export default function LoginPage() {
         setError("");
         localStorage.setItem("authToken", res.token);
         hideLoader();
-        setNotification("Signed In");
+        setNotification("Signed In. Redirecting to home page");
+        setTimeout(() => {
+          setRedirect(true);
+        }, 4000);
       } else {
         hideLoader();
         setError(res.message);
@@ -48,6 +53,11 @@ export default function LoginPage() {
       setError("Incorrect username or password");
     }
   };
+
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <>
       <Header />
@@ -55,7 +65,7 @@ export default function LoginPage() {
       <div className="wrapper">
         <main className="main">
           <section className="main__login">
-            {!auth ? (
+            {auth ? (
               <form
                 className="main__login--form"
                 onSubmit={(e) => {
