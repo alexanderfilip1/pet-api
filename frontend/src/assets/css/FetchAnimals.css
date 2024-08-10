@@ -1,0 +1,19 @@
+.fetchAnimals {
+  display: flex;
+  justify-content: center;
+  background: #212121;
+  margin: 1rem;
+  border-radius: 2rem;
+  padding: 1rem;
+  color: #fff;
+}
+
+.fetchAnimals__form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.fullWidth {
+  width: 100%;
+}

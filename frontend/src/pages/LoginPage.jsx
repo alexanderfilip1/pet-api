@@ -65,7 +65,7 @@ export default function LoginPage() {
       <div className="wrapper">
         <main className="main">
           <section className="main__login">
-            {!auth ? (
+            {auth ? (
               <form
                 className="main__login--form"
                 onSubmit={(e) => {
