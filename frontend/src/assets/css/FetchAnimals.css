@@ -11,9 +11,40 @@
 .fetchAnimals__form {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 
 .fullWidth {
   width: 100%;
+}
+
+.fetchAnimals__wrapper {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.animal {
+  margin: 1rem;
+  border: 0.1rem solid red;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.animal__source {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.error {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.animal__image {
+  margin: 0.5rem 0;
+  border-radius: 1rem;
+  border: 0.1rem solid red;
+  box-shadow: 0.3rem 0.3rem 0.3rem 0.3rem #3804d3;
 }
