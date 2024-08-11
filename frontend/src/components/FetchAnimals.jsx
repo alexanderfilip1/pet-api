@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../assets/css/FetchAnimals.css";
 import Loader from "./Loader";
-import useAuthToken from "../components/AuthToken"; // Import custom hook
+import useAuthToken from "../components/AuthToken";
 
 export default function FetchAnimals() {
   const [animal, setAnimal] = useState("");
