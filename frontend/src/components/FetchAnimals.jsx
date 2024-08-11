@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "../assets/css/FetchAnimals.css";
+import useAuthToken from "../components/AuthToken";
 
 export default function FetchAnimals() {
   const [animal, setAnimal] = useState("");
   const [random, setRandom] = useState();
   const [breed, setBreed] = useState();
-
-  const authToken = localStorage.getItem("authToken");
+  const { token } = useAuthToken();
 
   const fetchAnimalData = async () => {
     const url = `http://localhost:3000/api/animal/?animal=${animal}&random=${random}&breed=${breed}`;
@@ -14,7 +14,7 @@ export default function FetchAnimals() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     const body = await req.json();
