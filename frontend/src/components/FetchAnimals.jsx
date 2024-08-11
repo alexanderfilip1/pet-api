@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../assets/css/FetchAnimals.css";
 import Loader from "./Loader";
+import useAuthToken from "../components/AuthToken";
 
 export default function FetchAnimals() {
   const [animal, setAnimal] = useState("");
@@ -10,7 +11,7 @@ export default function FetchAnimals() {
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const authToken = localStorage.getItem("authToken");
+  const { token } = useAuthToken(); 
 
   const hideLoader = () => {
     setTimeout(() => {
@@ -26,7 +27,7 @@ export default function FetchAnimals() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -36,7 +37,7 @@ export default function FetchAnimals() {
         setAnimalInformation(body);
         setError("");
       } else {
-        setError(body.message);
+        setError(body.message || "An error occurred.");
         setAnimalInformation(null);
       }
       hideLoader();

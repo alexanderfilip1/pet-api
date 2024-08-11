@@ -4,7 +4,7 @@ import "../assets/css/Register.css";
 import SubmitBtn from "../components/SubmitBtn";
 import Loader from "../components/Loader";
 import { Navigate } from "react-router-dom";
-import AuthToken from "../components/AuthToken";
+import useAuthToken from "../components/AuthToken";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -13,7 +13,7 @@ export default function RegisterPage() {
   const [notification, setNotification] = useState("");
   const [loader, setLoader] = useState(false);
   const [redirect, setRedirect] = useState(false);
-  const auth = AuthToken();
+  const { auth } = useAuthToken();
 
   const hideLoader = () => {
     setTimeout(() => {

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import SubmitBtn from "../components/SubmitBtn";
 import "../assets/css/Login.css";
 import Loader from "../components/Loader";
-import AuthToken from "../components/AuthToken";
+import useAuthToken from "../components/AuthToken";
 import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
@@ -13,13 +13,14 @@ export default function LoginPage() {
   const [notification, setNotification] = useState("");
   const [loader, setLoader] = useState(false);
   const [redirect, setRedirect] = useState(false);
-  const auth = AuthToken();
+  const { auth } = useAuthToken();
 
   const hideLoader = () => {
     setTimeout(() => {
       setLoader(false);
     }, 2000);
   };
+
   const sendData = async () => {
     setLoader(true);
     const data = {
@@ -65,7 +66,7 @@ export default function LoginPage() {
       <div className="wrapper">
         <main className="main">
           <section className="main__login">
-            {auth ? (
+            {!auth ? (
               <form
                 className="main__login--form"
                 onSubmit={(e) => {
