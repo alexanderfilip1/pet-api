@@ -1,4 +1,4 @@
-.fetchAnimals {
+.container {
   display: flex;
   justify-content: center;
   background: #212121;
@@ -8,7 +8,7 @@
   color: #fff;
 }
 
-.fetchAnimals__form {
+.form {
   display: flex;
   flex-direction: column;
   width: 100%;
