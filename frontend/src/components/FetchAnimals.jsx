@@ -27,7 +27,7 @@ export default function FetchAnimals() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Use token from custom hook
+          Authorization: `Bearer ${token}`,
         },
       });
 
