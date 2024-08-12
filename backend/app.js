@@ -15,6 +15,7 @@ var indexRouter = require("./routes/index");
 var registerApi = require("./routes/registerApi");
 var loginApi = require("./routes/loginApi");
 var animalsApi = require("./routes/animalsApi");
+var uploadAnimalsApi = require("./routes/uploadAnimalsApi");
 
 var app = express();
 app.use(cors(corsOptions));
@@ -30,5 +31,6 @@ app.use("/", indexRouter);
 app.use("/api/register", registerApi);
 app.use("/api/login", loginApi);
 app.use("/api/animal", animalsApi);
+app.use("/api/uploadanimals", uploadAnimalsApi);
 
 module.exports = app;

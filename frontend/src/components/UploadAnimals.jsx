@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Loader from "./Loader";
 import "../assets/css/UploadAnimals.css";
+import useAuthToken from "../components/AuthToken";
 
 export default function UploadAnimals() {
   const [loader, setLoader] = useState(false);
@@ -8,10 +9,26 @@ export default function UploadAnimals() {
   const [breed, setBreed] = useState("");
   const [image, setImage] = useState(null);
 
-  const sendData = () => {
-    console.log(animal, breed, image);
-  };
+  const { token } = useAuthToken();
 
+  const sendData = async () => {
+    console.log(animal, breed, image);
+    const data = {
+      animal: animal,
+      breed: breed,
+      image: image,
+    };
+    const req = fetch("http://localhost:3000/api/uploadAnimals", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Use token from custom hook
+      },
+      body: JSON.stringify(data),
+    });
+    const body = (await req).json();
+    console.log(body);
+  };
   return (
     <>
       {loader && <Loader />}
