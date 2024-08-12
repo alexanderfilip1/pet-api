@@ -18,18 +18,17 @@ export default function UploadAnimals() {
       breed: breed,
       image: image,
     };
-    const req = await fetch("http://localhost:3000/api/uploadAnimals", {
+    const req = fetch("http://localhost:3000/api/uploadAnimals", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`, // Use token from custom hook
       },
       body: JSON.stringify(data),
     });
-    const body = await req.json();
+    const body = (await req).json();
     console.log(body);
   };
-
   return (
     <>
       {loader && <Loader />}
