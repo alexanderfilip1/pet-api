@@ -11,7 +11,7 @@ export default function FetchAnimals() {
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const { token } = useAuthToken(); 
+  const { token } = useAuthToken();
 
   const hideLoader = () => {
     setTimeout(() => {
@@ -51,10 +51,10 @@ export default function FetchAnimals() {
   return (
     <>
       {loader && <Loader />}
-      <section className="fetchAnimals">
+      <section className="fetchAnimals container">
         <div className="fetchAnimals__wrapper">
           <form
-            className="fetchAnimals__form"
+            className="form"
             onSubmit={(e) => {
               e.preventDefault();
               fetchAnimalData();
