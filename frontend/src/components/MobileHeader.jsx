@@ -1,12 +1,18 @@
+import React, { useState, useEffect } from "react";
 import links from "../Links";
 import "../assets/css/MobileHeader.css";
 import AuthToken from "../components/AuthToken";
 
 export default function MobileHeader() {
   const { auth } = AuthToken();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), 100);
+  }, []);
 
   return (
-    <div className="mobileHeader">
+    <div className={`mobileHeader ${isVisible ? "show" : ""}`}>
       <ul className="mobileHeader__list">
         {!auth ? (
           links.map((link, index) => {
