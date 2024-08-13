@@ -5,8 +5,10 @@ import "../assets/css/Login.css";
 import Loader from "../components/Loader";
 import useAuthToken from "../components/AuthToken";
 import { Navigate } from "react-router-dom";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export default function LoginPage() {
+  useDocumentTitle("| Sign In");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
