@@ -1,3 +1,21 @@
+@keyframes dot-blink {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: ".";
+  }
+}
+
 .main {
   position: fixed;
   inset: 0px;
@@ -49,4 +67,13 @@
 
 .notification {
   color: greenyellow;
+}
+
+.dots {
+  display: inline-block;
+}
+
+.dots::after {
+  content: "";
+  animation: dot-blink 1.5s step-start infinite;
 }
