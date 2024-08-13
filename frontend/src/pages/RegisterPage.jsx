@@ -5,8 +5,10 @@ import SubmitBtn from "../components/SubmitBtn";
 import Loader from "../components/Loader";
 import { Navigate } from "react-router-dom";
 import useAuthToken from "../components/AuthToken";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export default function RegisterPage() {
+  useDocumentTitle("| Register");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
