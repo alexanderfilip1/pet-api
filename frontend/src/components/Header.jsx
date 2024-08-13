@@ -33,17 +33,24 @@ export default function Header() {
           <ul className="header__list">
             {console.log("Auth: ", auth, "Token:", token)}
             {auth ? (
-              <li className="header__list--item">
-                <a
-                  href="/"
-                  className="header__list--link"
-                  onClick={() => {
-                    localStorage.removeItem("authToken");
-                  }}
-                >
-                  Log Out
-                </a>
-              </li>
+              <>
+                <li className="header__list--item">
+                  <a
+                    href="/"
+                    className="header__list--link"
+                    onClick={() => {
+                      localStorage.removeItem("authToken");
+                    }}
+                  >
+                    Log Out
+                  </a>
+                </li>
+                <li className="header__list--item">
+                  <a href="/documentation" className="header__list--link">
+                    Documentation
+                  </a>
+                </li>
+              </>
             ) : (
               links.map((link, index) => {
                 const { path, url } = link;
