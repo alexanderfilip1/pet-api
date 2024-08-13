@@ -21,6 +21,12 @@ export default function LoginPage() {
     }, 2000);
   };
 
+  const redirectToHomepage = () => {
+    setTimeout(() => {
+      setRedirect(true);
+    }, 4000);
+  };
+
   const sendData = async () => {
     setLoader(true);
     const data = {
@@ -40,9 +46,7 @@ export default function LoginPage() {
         localStorage.setItem("authToken", res.token);
         hideLoader();
         setNotification("Signed In. Redirecting to home page");
-        setTimeout(() => {
-          setRedirect(true);
-        }, 4000);
+        redirectToHomepage();
       } else {
         hideLoader();
         setError(res.message);
@@ -102,7 +106,9 @@ export default function LoginPage() {
               </form>
             ) : (
               <h1 style={{ textAlign: "center" }}>
-                You&apos;re already logged in.
+                {redirectToHomepage()}
+                You&apos;re logged in. Redirecting{" "}
+                <span className="dots"></span>
               </h1>
             )}
           </section>
