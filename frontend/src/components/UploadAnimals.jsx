@@ -28,6 +28,7 @@ export default function UploadAnimals() {
         return;
       }
       setError();
+      setNotification();
       const formData = new FormData();
       formData.append("animal", animal);
       formData.append("breed", breed);
@@ -41,9 +42,12 @@ export default function UploadAnimals() {
       });
       const body = await req.json();
       hideLoader();
-      setNotification(body.message);
+      if (body.status === "error") {
+        setError(body.message);
+        return;
+      }
 
-      console.log(body);
+      setNotification(body.message);
     } catch (err) {
       console.log(err);
     }

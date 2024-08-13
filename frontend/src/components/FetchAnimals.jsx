@@ -67,7 +67,7 @@ export default function FetchAnimals() {
               name="options"
               value={animal}
               onChange={(e) => setAnimal(e.target.value)}
-              className="fullWidth"
+              className="fullWidth field"
             >
               <option value="" disabled>
                 Select an animal
@@ -83,7 +83,7 @@ export default function FetchAnimals() {
                 id="random"
                 value={random}
                 onChange={(e) => setRandom(e.target.value)}
-                className="fullWidth"
+                className="fullWidth field"
               >
                 <option value="" disabled>
                   Select random option
@@ -97,7 +97,7 @@ export default function FetchAnimals() {
               <input
                 type="text"
                 id="breed"
-                className="fullWidth"
+                className="fullWidth field"
                 value={breed}
                 onChange={(e) => setBreed(e.target.value)}
               />
