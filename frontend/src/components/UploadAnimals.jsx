@@ -8,26 +8,45 @@ export default function UploadAnimals() {
   const [animal, setAnimal] = useState("");
   const [breed, setBreed] = useState("");
   const [image, setImage] = useState(null);
+  const [error, setError] = useState("");
+  const [notification, setNotification] = useState("");
 
   const { token } = useAuthToken();
 
+  const hideLoader = () => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  };
+
   const sendData = async () => {
-    console.log(animal, breed, image);
-    const data = {
-      animal: animal,
-      breed: breed,
-      image: image,
-    };
-    const req = fetch("http://localhost:3000/api/uploadAnimals", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Use token from custom hook
-      },
-      body: JSON.stringify(data),
-    });
-    const body = (await req).json();
-    console.log(body);
+    setLoader(true);
+    try {
+      if (!token) {
+        hideLoader();
+        setError("You are not authorized to do that. Firstly log in");
+        return;
+      }
+      setError();
+      const formData = new FormData();
+      formData.append("animal", animal);
+      formData.append("breed", breed);
+      formData.append("image", image);
+      const req = await fetch("http://localhost:3000/api/uploadanimals", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      const body = await req.json();
+      hideLoader();
+      setNotification(body.message);
+
+      console.log(body);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>
@@ -43,14 +62,19 @@ export default function UploadAnimals() {
           >
             <label htmlFor="animal">
               Animal Type
-              <input
-                type="text"
-                id="animal"
-                className="fullWidth field"
-                onChange={(e) => {
-                  setAnimal(e.target.value);
-                }}
-              />
+              <select
+                id="animals"
+                name="options"
+                className="field fullWidth"
+                value={animal}
+                onChange={(e) => setAnimal(e.target.value)}
+              >
+                <option value="" disabled>
+                  Select an animal
+                </option>
+                <option value="cat">Cat</option>
+                <option value="fish">Fish</option>
+              </select>
             </label>
             <label htmlFor="animal__breed">
               Breed
@@ -74,6 +98,8 @@ export default function UploadAnimals() {
                 }}
               />
             </label>
+            <p className="error">{error}</p>
+            <p className="notification">{notification}</p>
             <button className="btn">Upload Animal</button>
           </form>
         </div>
