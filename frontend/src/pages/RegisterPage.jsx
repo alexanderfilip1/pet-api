@@ -35,6 +35,7 @@ export default function RegisterPage() {
       const body = await req.json();
       if (body.status === "error") {
         setNotification("");
+        hideLoader();
         setError(body.message);
         hideLoader();
       } else {
@@ -61,53 +62,55 @@ export default function RegisterPage() {
     <>
       <Header />
       {loader && <Loader />}
-      <main className="main">
-        <section className="main__register">
-          {!auth ? (
-            <>
-              <form
-                action=""
-                className="main__register--form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  registerUser();
-                  setLoader(true);
-                }}
-              >
-                <label htmlFor="username">
-                  Username
-                  <input
-                    type="text"
-                    id="username"
-                    className="inputField"
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                    }}
-                  />
-                </label>
-                <label htmlFor="password">
-                  Password
-                  <input
-                    type="password"
-                    id="password"
-                    className="inputField"
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  />
-                </label>
-                <p className="error">{error}</p>
-                <p className="notification">{notification}</p>
-                <SubmitBtn action={"Register"} />
-              </form>
-            </>
-          ) : (
-            <h1 style={{ textAlign: "center" }}>
-              You&apos;re already registered
-            </h1>
-          )}
-        </section>
-      </main>
+      <div className="wrapper">
+        <main className="main">
+          <section className="main__register">
+            {!auth ? (
+              <>
+                <form
+                  action=""
+                  className="main__register--form"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    registerUser();
+                    setLoader(true);
+                  }}
+                >
+                  <label htmlFor="username">
+                    Username
+                    <input
+                      type="text"
+                      id="username"
+                      className="inputField"
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                      }}
+                    />
+                  </label>
+                  <label htmlFor="password">
+                    Password
+                    <input
+                      type="password"
+                      id="password"
+                      className="inputField"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                  </label>
+                  <p className="error">{error}</p>
+                  <p className="notification">{notification}</p>
+                  <SubmitBtn action={"Register"} />
+                </form>
+              </>
+            ) : (
+              <h1 style={{ textAlign: "center" }}>
+                You&apos;re already registered
+              </h1>
+            )}
+          </section>
+        </main>
+      </div>
     </>
   );
 }
