@@ -6,7 +6,7 @@ export default function DocumentationSection() {
     {
       title: "Project Overview",
       content:
-        "This project is a full-stack application that includes a backend server built with `Node.js` and `Express.js`, and a `MySQL` database for data storage. The server is designed to handle authentication, manage animal data, and serve images associated with different animals. A front-end interface is provided to interact with the server and demonstrate its functionalities.",
+        "This project is a full-stack application that includes a backend server built with Node.js, Express.js, React and a MySQL database for data storage. The server is designed to handle authentication, manage animal data, and serve images associated with different animals. A front-end interface is provided to interact with the server and demonstrate its functionalities.",
     },
     {
       title: "Authentication",
