@@ -6,6 +6,8 @@
   border-radius: 2rem;
   padding: 1rem;
   color: #fff;
+  animation: fadeInLeft;
+  animation-duration: 1.5s;
 }
 
 .form {
