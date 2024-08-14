@@ -10,7 +10,11 @@ const animalSchema = z.object({
     }),
   breed: z
     .string()
-    .min(3, "Breed must be at least 3 characters long")
+    .nullable()
+    .transform((val) => (val === "" ? null : val))
+    .refine((val) => val === null || val.length >= 3, {
+      message: "Breed must be at least 3 characters long if provided",
+    })
     .optional(),
 });
 
